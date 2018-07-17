@@ -211,16 +211,10 @@ class FileSystemLoader(BaseLoader):
                     template = os.path.join(dirpath, filename) \
                         [len(searchpath):].strip(os.path.sep) \
                                           .replace(os.path.sep, '/')
-                    if self.enable_glob:
-                        templates = glob.glob(template)
-                    else:
-                        templates = [template]
-
-                    for template in templates:
-                        if template[:2] == './':
-                            template = template[2:]
-                        if template not in found:
-                            found.add(template)
+                    if template[:2] == './':
+                        template = template[2:]
+                    if template not in found:
+                        found.add(template)
         return sorted(found)
 
 
